@@ -7,15 +7,15 @@ import {
   HandCoins,
   LogOut,
   Menu,
-  X,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/authSlice";
 
 export default function Navigation({ active, setActive }) {
   const { user } = useSelector((state) => state.authSlice) || {};
+  const { balance } = useSelector((state) => state.incomeSlice);
   const [close, setClose] = useState(false);
-  const menuRef = useRef(null); // Ref for the menu container
+  const menuRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -36,8 +36,7 @@ export default function Navigation({ active, setActive }) {
         key={list.id}
         onClick={() => {
           setActive(list.id);
-          setClose(!close);
-          if (!close) setClose(false); // Close menu on mobile
+          setClose(false); // Close menu on selection
         }}
         className={`flex cursor-pointer mb-2 gap-3 ${
           active === list.id ? "opacity-100 font-bold" : "opacity-70"
@@ -58,7 +57,6 @@ export default function Navigation({ active, setActive }) {
 
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Clean up the event listener
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -67,16 +65,18 @@ export default function Navigation({ active, setActive }) {
   return (
     <>
       {/* Mobile Navigation */}
-      
-        {!close ?<div
-        onClick={() => setClose(!close)}
-        className="flex lg:hidden z-20 absolute p-3 bg-white left-6 top-6 cursor-pointer"
-        aria-label="Toggle Navigation"
-      > <Menu /> </div> : null}
-      
+      {!close ? (
+        <div
+          onClick={() => setClose(!close)}
+          className="flex lg:hidden z-20 absolute p-3 bg-white left-6 top-6 cursor-pointer"
+          aria-label="Toggle Navigation"
+        >
+          <Menu />
+        </div>
+      ) : null}
 
       <div
-        ref={menuRef} // Attach the ref here
+        ref={menuRef}
         className={`w-[250px] absolute left-5 h-[80vh] flex lg:hidden flex-col border-[5px] border-white bg-[#FAC67A] shadow-2xl z-50 rounded-xl pl-7 pt-[50px] transform transition-all duration-300 ${
           close ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
         }`}
@@ -92,7 +92,19 @@ export default function Navigation({ active, setActive }) {
             <h1 className="font-bold">
               {user ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "Guest"}
             </h1>
-            <p className="opacity-70">Your Money</p>
+            <p>
+              Total:{" "}
+              <span>
+                <span className="font-bold">$ </span>
+                <span
+                  className={`${
+                    (balance || user?.balance) > 500 ? "text-green-500" : "text-red-500"
+                  } font-bold`}
+                >
+                  {balance || user?.balance}
+                </span>
+              </span>
+            </p>
           </div>
         </div>
 
@@ -122,7 +134,19 @@ export default function Navigation({ active, setActive }) {
             <h1 className="font-bold">
               {user ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "Guest"}
             </h1>
-            <p className="opacity-70">Your Money</p>
+            <p>
+              Total:{" "}
+              <span>
+                <span className="font-bold">$ </span>
+                <span
+                  className={`${
+                    (balance || user?.balance) > 500 ? "text-green-500" : "text-red-500"
+                  } font-bold`}
+                >
+                  {balance || user?.balance}
+                </span>
+              </span>
+            </p>
           </div>
         </div>
 

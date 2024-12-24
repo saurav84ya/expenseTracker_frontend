@@ -6,7 +6,8 @@ import axios from "axios"
 const initialState = {
     isFetchIncomeLoading : false ,
     fetchData : null,
-    message : null
+    message : null,
+    balance : null
 }
 
 export const addIncome = createAsyncThunk(
@@ -69,6 +70,7 @@ const incomeSlice = createSlice({
         .addCase(getIncome.fulfilled , (state  , action) => {
             state.isFetchIncomeLoading = false;
             state.fetchData = action.payload.success ? action.payload.data : null
+            state.balance = action.payload.success ? action.payload.balance : null
             state.message =  action.payload.message;
         })
         .addCase(getIncome.rejected , (state) => {
