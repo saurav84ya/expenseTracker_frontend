@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import avtar from "../imgs/avtar.png";
 import {
   Banknote,
@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/authSlice";
+import { MyContext } from "@/MyContext";
 
 export default function Navigation({ active, setActive }) {
   const { user } = useSelector((state) => state.authSlice) || {};
@@ -48,12 +49,16 @@ export default function Navigation({ active, setActive }) {
     ));
 
   // Close the menu when clicking outside of it
+  const abc = balance || user?.balance
+  const {setTotalB} = useContext(MyContext)
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setClose(false);
       }
     };
+    setTotalB(abc)
 
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -62,13 +67,15 @@ export default function Navigation({ active, setActive }) {
     };
   }, []);
 
+
+ 
   return (
     <>
       {/* Mobile Navigation */}
       {!close ? (
         <div
           onClick={() => setClose(!close)}
-          className="flex lg:hidden z-20 absolute p-3 bg-white left-6 top-6 cursor-pointer"
+          className="flex xl:hidden z-20 absolute p-3 bg-white left-6 top-6 cursor-pointer"
           aria-label="Toggle Navigation"
         >
           <Menu />
@@ -77,7 +84,7 @@ export default function Navigation({ active, setActive }) {
 
       <div
         ref={menuRef}
-        className={`w-[250px] absolute left-5 h-[80vh] flex lg:hidden flex-col border-[5px] border-white bg-[#FAC67A] shadow-2xl z-50 rounded-xl pl-7 pt-[50px] transform transition-all duration-300 ${
+        className={`w-[250px] absolute left-5 h-[80vh] flex xl:hidden flex-col border-[5px] border-white bg-[#FAC67A] shadow-2xl z-50 rounded-xl pl-7 pt-[50px] transform transition-all duration-300 ${
           close ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
         }`}
       >
@@ -122,7 +129,7 @@ export default function Navigation({ active, setActive }) {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="lg:w-[250px] w-[200px] border-[5px] border-white shadow-2xl h-[80vh] lg:flex flex-col hidden relative bg-[#F9E6CF] z-50 rounded-xl md:ml-[10px] lg:ml-[20px] xl:ml-[30px] pl-2 lg:pl-7 pt-[50px]">
+      <div className="lg:w-[250px] w-[200px] border-[5px] border-white shadow-2xl h-[80vh] xl:flex flex-col hidden relative bg-[#F9E6CF] z-50 rounded-xl md:ml-[10px] lg:ml-[20px] xl:ml-[30px] pl-2 lg:pl-7 pt-[50px]">
         {/* User Info */}
         <div className="flex gap-3">
           <img

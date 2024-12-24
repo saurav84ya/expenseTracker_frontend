@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useToast } from '@/hooks/use-toast'
 import { addIncome, delIncome, getIncome } from '@/store/tranisations'
 import { BadgeX, Bitcoin, CircuitBoard, LibraryBig, MessageCircleMore, NotepadTextDashed, Youtube } from 'lucide-react'
+import { MyContext } from '@/MyContext'
 
 const incomeIcons = {
   frelancing: <CircuitBoard size={40} />,
@@ -17,6 +18,7 @@ export default function Income() {
   const { isFetchIncomeLoading, fetchData,balance, message } = useSelector((state) => state.incomeSlice)
   const { user } = useSelector((state) => state.authSlice)
   const { toast } = useToast()
+  const {setTotalI} = useContext(MyContext)
 
 
   // console.log("fetchData" ,fetchData)
@@ -191,6 +193,7 @@ export default function Income() {
               type="submit"
             >
               {isFetchIncomeLoading ? (
+                <div className="justify-center items-center  flex" >
                 <svg
                   className="animate-spin h-5 w-5 text-white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -211,6 +214,7 @@ export default function Income() {
                     d="M4 12a8 8 0 018-8v8H4z"
                   ></path>
                 </svg>
+                </div>
               ) : (
                 '+ Add Income'
               )}

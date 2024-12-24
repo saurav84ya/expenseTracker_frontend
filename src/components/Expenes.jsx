@@ -1,107 +1,134 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useToast } from '@/hooks/use-toast'
-import { addIncome, delIncome, getIncome } from '@/store/tranisations'
-import { BadgeX, Bitcoin, CircuitBoard, LibraryBig, MessageCircleMore, NotepadTextDashed, Youtube } from 'lucide-react'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useToast } from "@/hooks/use-toast";
+import { addExpanse, delExpanse, getExpanse } from "@/store/tranisations";
+//update
+import {
+  BadgeX,
+  BaggageClaim,
+  Bike,
+  Bitcoin,
+  CircuitBoard,
+  LandPlot,
+  LibraryBig,
+  MessageCircleMore,
+  NotebookPen,
+  NotepadTextDashed,
+  PiggyBank,
+  Podcast,
+  Scroll,
+  Stethoscope,
+  WalletMinimal,
+  Youtube,
+} from "lucide-react";
 
 const incomeIcons = {
-  frelancing: <CircuitBoard size={40} />,
-  Job: <NotepadTextDashed size={40} />,
-  digital: <Bitcoin size={40} />,
-  yt: <Youtube size={40} />,
-  other: <LibraryBig size={40} />,
-}
+  medical: <Stethoscope size={40} />,
+  trip: <Bike size={40} />,
+  sports: <LandPlot size={40} />,
+  suscription: <Podcast size={40} />,
+  tution: <NotebookPen size={40} />,
+  mislinious: <WalletMinimal size={40} />,
+  emi: <PiggyBank size={40} />,
+  market: <BaggageClaim size={40} />,
+  other: <Scroll size={40} />,
+};
 
-export default function Expenes () {
-  const dispatch = useDispatch()
-  const { isFetchIncomeLoading, fetchData,balance, message } = useSelector((state) => state.incomeSlice)
-  const { user } = useSelector((state) => state.authSlice)
-  const { toast } = useToast()
+export default function Expenes() {
+  const dispatch = useDispatch();
+  const { isFetchExpanseLoading, fetchDataExpanse } = useSelector(
+    (state) => state.incomeSlice
+  );
+  //update
+  const { user } = useSelector((state) => state.authSlice);
+  const { toast } = useToast();
 
-
-  // console.log("fetchData" ,fetchData)
+  // console.log("fetchDataExpanse" ,fetchDataExpanse)
   // console.log("balance" , balance)
-// 
+  //
   const [formData, setFormData] = useState({
-    title: '',
-    amount: '',
-    category: '',
-    description: '',
-    date: '',
+    title: "",
+    amount: "",
+    category: "",
+    description: "",
+    date: "",
     userId: user?.id,
-  })
+  });
 
-  const [refreshTrigger, setRefreshTrigger] = useState(false)
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
-  }
+    });
+  };
 
-  const handleAddIncome = (e) => {
-    e.preventDefault()
-    dispatch(addIncome(formData)).then((data) => {
+  const handleAddExpanse = (e) => {
+    e.preventDefault();
+    dispatch(addExpanse(formData)).then((data) => {
       if (data?.payload?.success) {
         toast({
-          title: data?.payload?.message || 'Income added successfully',
-        })
+          title: data?.payload?.message || "Income added successfully",
+        });
         setFormData({
-          title: '',
-          amount: '',
-          category: '',
-          description: '',
-          date: '',
+          title: "",
+          amount: "",
+          category: "",
+          description: "",
+          date: "",
           userId: user?.id,
-        })
-        setRefreshTrigger((prev) => !prev) // Trigger re-fetch
+        });
+        setRefreshTrigger((prev) => !prev); // Trigger re-fetch
       } else {
         toast({
-          title: data?.payload?.message || 'Server not responding',
-          variant: 'destructive',
-        })
+          title: data?.payload?.message || "Server not responding",
+          variant: "destructive",
+        });
       }
-    })
-  }
+    });
+  };
 
-  const handleDeleteIncome = (incomeId) => {
-    dispatch(delIncome({ userId: user.id, incomeId })).then((data) => {
+  const handleDeleteExpanse = (expanseId) => {
+    dispatch(delExpanse({ userId: user.id, expanseId })).then((data) => {
       if (data?.payload?.success) {
         toast({
-          title: 'Income deleted successfully',
-        })
-        setRefreshTrigger((prev) => !prev) // Trigger re-fetch
+          title: "Income deleted successfully",
+        });
+        setRefreshTrigger((prev) => !prev); // Trigger re-fetch
       } else {
         toast({
-          title: 'Failed to delete income',
-          variant: 'destructive',
-        })
+          title: "Failed to delete income",
+          variant: "destructive",
+        });
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    dispatch(getIncome(user?.id))
-  }, [dispatch, user?.id, refreshTrigger])
+    dispatch(getExpanse(user?.id));
+  }, [dispatch, user?.id, refreshTrigger]);
 
-  const inputClasss = 'border-[2px] h-10 w-full p-3 border-white rounded-[5px]'
+  const inputClasss = "border-[2px] h-10 w-full p-3 border-white rounded-[5px]";
 
-  const totalIncome = fetchData?.reduce((sum, item) => sum + Number(item.amount), 0) || 0;
+  const totalExpanse =
+    fetchDataExpanse?.reduce((sum, item) => sum + Number(item.amount), 0) || 0;
 
   return (
     <>
       {/* <h1 className="font-bold text-2xl mt-7 ml-4 text-center">Incomes</h1> */}
-      <div className='font-bold text-2xl my-7 ml-4 text-center' >
-        <h2>Total expenes : <span  className='text-green-500' >${totalIncome}</span></h2>
+      <div className="font-bold text-2xl my-7 ml-4 text-center">
+        <h2>
+          Total expenes : <span className="text-red-500">${totalExpanse}</span>
+        </h2>
       </div>
       <div className="flex md:flex-row-reverse justify-center lg:gap-0 xl:gap-4 flex-col">
         <div>
           <div className="flex flex-col items-center gap-3 p-5 overflow-y-auto overflow-x-hidden h-[500px] md:h-[800px] lg:h-[600px] w-full">
-            {fetchData?.map((item, index) => (
+            {fetchDataExpanse?.map((item, index) => (
               <div
-                // onRander={() =>  {totalIncome = totalIncome + Number(item.amount)} }
+                // onRander={() =>  {totalExpanse = totalIncome + Number(item.amount)} }
                 key={index}
                 className="flex relative items-center p-2 border-2 rounded-[20px] w-full md:w-[420px] border-white hover:border-black gap-3"
               >
@@ -110,7 +137,7 @@ export default function Expenes () {
                 </div>
                 <div>
                   <div className="relative">
-                    <div className="absolute w-[10px] h-[10px] top-2 rounded-full bg-green-400"></div>
+                    <div className="absolute w-[10px] h-[10px] top-2 rounded-full bg-red-400"></div>
                     <p className="ml-4 font-bold">
                       {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
                     </p>
@@ -128,7 +155,7 @@ export default function Expenes () {
                     </div>
                     <button
                       className="md:p-2 p-1 bg-violet-900 hover:bg-red-500 text-white rounded-full absolute md:right-3 right-1 md:top-4 top-1"
-                      onClick={() => handleDeleteIncome(item._id)}
+                      onClick={() => handleDeleteExpanse(item._id)}
                     >
                       <BadgeX />
                     </button>
@@ -140,12 +167,12 @@ export default function Expenes () {
         </div>
 
         <div className="p-4">
-          <form onSubmit={handleAddIncome} className="flex flex-col gap-3">
+          <form onSubmit={handleAddExpanse} className="flex flex-col gap-3">
             <input
               className={`${inputClasss}`}
               type="text"
               name="title"
-              placeholder="Salary Title"
+              placeholder="Title"
               value={formData.title}
               onChange={handleChange}
             />
@@ -153,7 +180,7 @@ export default function Expenes () {
               className={`${inputClasss}`}
               type="number"
               name="amount"
-              placeholder="Salary Amount in $"
+              placeholder="Amount in $"
               value={formData.amount}
               onChange={handleChange}
             />
@@ -179,19 +206,24 @@ export default function Expenes () {
                 onChange={handleChange}
               >
                 <option value="">select</option>
-                <option value="frelancing">Freelancing</option>
-                <option value="Job">Job earning</option>
-                <option value="digital">Digital marketing</option>
-                <option value="yt">YT revenue</option>
+                <option value="medical">Medical</option>
+                <option value="trip">Trip</option>
+                <option value="sports">Sports</option>
+                <option value="suscription">Suscription</option>
+                <option value="tution">Tution fee</option>
+                <option value="mislinious">Mislinious</option>
+                <option value="emi">Emi</option>
+                <option value="market">Market</option>
                 <option value="other">Other</option>
               </select>
             </div>
             <button
-              className="text-white text-center font-bold p-2 bg-pink-600 hover:bg-pink-500 rounded-[10px]"
+              className="text-white text-center font-bold p-2 bg-red-500 hover:bg-red-600 rounded-[10px]"
               type="submit"
             >
-              {isFetchIncomeLoading ? (
-                <svg
+              {isFetchExpanseLoading ? (
+                <div className="justify-center items-center  flex" >
+                  <svg
                   className="animate-spin h-5 w-5 text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -211,13 +243,14 @@ export default function Expenes () {
                     d="M4 12a8 8 0 018-8v8H4z"
                   ></path>
                 </svg>
+                </div>
               ) : (
-                '+ Add Income'
+                "+ Add Expens"
               )}
             </button>
           </form>
         </div>
       </div>
     </>
-  )
+  );
 }
