@@ -32,6 +32,7 @@ export const getIncome = createAsyncThunk(
     async (userId) => {
         const response = await axios.get(
             `${import.meta.env.VITE_API_URL_SERVER}a/fetch-income/${userId}`,
+            
         )
         // console.log(response.data)
         return response.data
