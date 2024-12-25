@@ -50,7 +50,7 @@ export default function Navigation({ active, setActive }) {
 
   // Close the menu when clicking outside of it
   const abc = balance || user?.balance
-  const {setTotalB} = useContext(MyContext)
+  const {setTotalB , totalB} = useContext(MyContext)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,7 +58,7 @@ export default function Navigation({ active, setActive }) {
         setClose(false);
       }
     };
-    setTotalB(abc)
+
 
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -150,7 +150,7 @@ export default function Navigation({ active, setActive }) {
                     (balance || user?.balance) > 500 ? "text-green-500" : "text-red-500"
                   } font-bold`}
                 >
-                  {balance || user?.balance}
+                  {balance || totalB}
                 </span>
               </span>
             </p>

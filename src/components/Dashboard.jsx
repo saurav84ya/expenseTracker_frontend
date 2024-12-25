@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import LineChart from "./ui/LineChart";
 import RadarChart from "./ui/RadarChart";
 import { useDispatch, useSelector } from "react-redux";
 import { getDashBoard } from "@/store/tranisations";
+import { MyContext } from "@/MyContext";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function Dashboard() {
   );
 
   const { user } = useSelector((state) => state.authSlice);
+  const {setTotalB} = useContext(MyContext)
 
   useEffect(() => {
     dispatch(getDashBoard(user?.id));
@@ -23,12 +25,16 @@ export default function Dashboard() {
   const totalExpenses = dashBoardExpnses?.reduce((sum, item) => sum + item.amount, 0) || 0;
   const totalBalance = totalIncome - totalExpenses;
 
+  useEffect(() => {
+    setTotalB(totalBalance)
+  },[totalBalance])
+
   // Combine and sort transactions by updatedAt
   const recentTransactions = [...(dashBoardIncome || []), ...(dashBoardExpnses || [])]
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(0, 3);
 
-    console.log(recentTransactions)
+    // console.log(recentTransactions)
 
   // Find min and max for salary and expenses
   const salaryAmounts = dashBoardIncome?.map((item) => item.amount) || [];

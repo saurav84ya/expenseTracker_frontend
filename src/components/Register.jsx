@@ -52,7 +52,7 @@ const Register = () => {
       }
     });
 
-    console.log("Form submitted", formData);
+    // console.log("Form submitted", formData);
     // Reset form
     // setFormData(initialState);
   };
