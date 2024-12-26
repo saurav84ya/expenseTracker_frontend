@@ -58,9 +58,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-[#F9E6CF] "  >
       {/* Sidebar */}
-      <div className="w-1/3 md:flex bg-gradient-to-r from-blue-400 to-teal-400 text-white hidden flex-col justify-center items-center p-6">
+      <div className="w-1/3 md:flex  text-black border-[5px] border-black rounded-xl m-5 hidden flex-col justify-center items-center p-6">
         <h2 className="text-4xl font-bold">Your App</h2>
         <p className="text-lg mt-4 text-center">
           Join us and start managing your finances today!
@@ -77,7 +77,7 @@ const Register = () => {
             placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <input
@@ -86,7 +86,7 @@ const Register = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <input
@@ -95,7 +95,7 @@ const Register = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <input
@@ -104,12 +104,12 @@ const Register = () => {
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-center items-center"
+            className="w-full bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-center items-center"
             disabled={isLoading}
           >
             {isLoading ? (

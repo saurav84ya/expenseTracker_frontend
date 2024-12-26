@@ -22,20 +22,54 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = () => {
+const LineChart = ({ dashBoardIncome, dashBoardExpnses }) => {
+  console.log("dashBoardIncome", dashBoardIncome, "dashBoardExpnses", dashBoardExpnses);
+
+  // Helper function to aggregate data by date
+  const aggregateDataByDate = (data) => {
+    const aggregated = {};
+    if (data && Array.isArray(data)) {
+      data.forEach((item) => {
+        const { date, amount } = item;
+        if (!aggregated[date]) {
+          aggregated[date] = 0;
+        }
+        aggregated[date] += amount;
+      });
+    }
+    return aggregated;
+  };
+
+  // Ensure default values if props are null or undefined
+  const safeIncomeData = dashBoardIncome || [];
+  const safeExpenseData = dashBoardExpnses || [];
+
+  // Aggregate income and expense data
+  const incomeData = aggregateDataByDate(safeIncomeData);
+  const expenseData = aggregateDataByDate(safeExpenseData);
+
+  // Extract dates and sort them
+  const allDates = Array.from(
+    new Set([...Object.keys(incomeData), ...Object.keys(expenseData)])
+  ).sort();
+
+  // Prepare data points for income and expenses
+  const incomePoints = allDates.map((date) => incomeData[date] || 0);
+  const expensePoints = allDates.map((date) => expenseData[date] || 0);
+
   // Define chart data and options
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], // X-axis labels
+    labels: allDates, // X-axis labels (dates)
     datasets: [
       {
-        label: 'Expnse',
-        data: [65, 59, 80, 81, 56, 55, 40], // Data points for Dataset 1
+        label: 'Expense',
+        data: expensePoints, // Data points for expenses
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
         label: 'Income',
-        data: [-20, 90, -30, 40, 70, -10, 60], // Data points for Dataset 2
+        data: incomePoints, // Data points for income
         borderColor: 'rgb(54, 162, 235)',
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
       },
@@ -50,7 +84,7 @@ const LineChart = () => {
       },
       title: {
         display: true,
-        text: "Graph",
+        text: "Income vs Expense",
       },
     },
   };

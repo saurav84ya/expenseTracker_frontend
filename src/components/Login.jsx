@@ -29,11 +29,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log(formData)
+    console.log(formData)
 
     dispatch(loginUser(formData))
       .then((data) => {
-        // console.log(data)
+        console.log(data)
         if(data?.payload?.success){
           toast({
             title: data?.payload?.message || "server not responding",
@@ -49,9 +49,9 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-[#F9E6CF] ">
       {/* Sidebar */}
-      <div className="w-1/3 bg-gradient-to-r from-pink-400 to-yellow-400 text-white hidden md:flex flex-col justify-center items-center p-6">
+      <div className="w-1/3 border-[5px] border-black rounded-xl m-5   text-black hidden md:flex flex-col justify-center items-center p-6">
         <h2 className="text-4xl font-bold">Your App</h2>
         <p className="text-lg mt-4 text-center">Manage your money effectively with ease!</p>
       </div>
@@ -66,7 +66,7 @@ const Login = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <input
@@ -75,12 +75,12 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-center items-center"
+            className="w-full bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 flex justify-center items-center"
             disabled={isLoading}
           >
             {isLoading ? (
