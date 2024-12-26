@@ -13,7 +13,7 @@ export default function App() {
 
   const {user , isAuthenticated , isLoading} = useSelector((state) => state.authSlice)
 
-  // console.log(user)
+  // //(user)
 
 
   const dispatch = useDispatch()

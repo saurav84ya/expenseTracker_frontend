@@ -50,7 +50,7 @@ export const checkAuth = createAsyncThunk(
         },
       }
     );
-    // console.log("response?.data",response?.data)
+    // //("response?.data",response?.data)
     return response.data;
   }
 );
@@ -64,7 +64,7 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
       withCredentials: true, // Include credentials for cross-origin
     }
   );
-  // console.log(response.data);
+  // //(response.data);
   return response.data;
 });
 

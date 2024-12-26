@@ -39,7 +39,7 @@ const Register = () => {
     }
     // You can send `formData` to your backend here
     dispatch(registerUser(formData)).then((data) => {
-      console.log(data);
+      //(data);
       if (data?.payload?.success) {
         toast({
           title: data?.payload?.message,
@@ -52,7 +52,7 @@ const Register = () => {
       }
     });
 
-    // console.log("Form submitted", formData);
+    // //("Form submitted", formData);
     // Reset form
     // setFormData(initialState);
   };

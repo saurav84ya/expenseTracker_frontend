@@ -21,8 +21,8 @@ export default function Income() {
   const {setTotalI} = useContext(MyContext)
 
 
-  // console.log("fetchData" ,fetchData)
-  // console.log("balance" , balance)
+  // //("fetchData" ,fetchData)
+  // //("balance" , balance)
 // 
   const [formData, setFormData] = useState({
     title: '',

@@ -18,7 +18,7 @@ export default function Dashboard() {
     dispatch(getDashBoard(user?.id));
   }, [dispatch, user?.id]);
 
-  // console.log(dashBoardIncome, dashBoardExpnses)
+  // //(dashBoardIncome, dashBoardExpnses)
 
   // Calculate totals
   const totalIncome =

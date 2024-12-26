@@ -22,7 +22,7 @@ export const addIncome = createAsyncThunk(
             `${import.meta.env.VITE_API_URL_SERVER}a/add-income`,
             formData
         )
-        // console.log(response.data)
+        // //(response.data)
         return response.data
     }
 )
@@ -34,7 +34,7 @@ export const getIncome = createAsyncThunk(
             `${import.meta.env.VITE_API_URL_SERVER}a/fetch-income/${userId}`,
             
         )
-        // console.log(response.data)
+        // //(response.data)
         return response.data
     }
 )
@@ -45,7 +45,7 @@ export const getDashBoard = createAsyncThunk(
         const response = await axios.get(
             `${import.meta.env.VITE_API_URL_SERVER}a/fetch-dashBoard/${userId}`,
         )
-        // console.log(response.data)
+        // //(response.data)
         return response.data
     }
 )
@@ -72,7 +72,7 @@ export const addExpanse = createAsyncThunk(
             `${import.meta.env.VITE_API_URL_SERVER}a/add-expanse`,
             formData
         )
-        // console.log(response.data)
+        // //(response.data)
         return response.data
     }
 )
@@ -83,7 +83,7 @@ export const getExpanse = createAsyncThunk(
         const response = await axios.get(
             `${import.meta.env.VITE_API_URL_SERVER}a/fetch-expanse/${userId}`,
         )
-        // console.log(response.data)
+        // //(response.data)
         return response.data
     }
 )

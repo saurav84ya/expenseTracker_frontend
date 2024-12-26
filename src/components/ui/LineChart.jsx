@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 const LineChart = ({ dashBoardIncome, dashBoardExpnses }) => {
-  console.log("dashBoardIncome", dashBoardIncome, "dashBoardExpnses", dashBoardExpnses);
+  //("dashBoardIncome", dashBoardIncome, "dashBoardExpnses", dashBoardExpnses);
 
   // Helper function to aggregate data by date
   const aggregateDataByDate = (data) => {

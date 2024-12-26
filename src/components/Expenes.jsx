@@ -43,8 +43,8 @@ export default function Expenes() {
   const { user } = useSelector((state) => state.authSlice);
   const { toast } = useToast();
 
-  // console.log("fetchDataExpanse" ,fetchDataExpanse)
-  // console.log("balance" , balance)
+  // //("fetchDataExpanse" ,fetchDataExpanse)
+  // //("balance" , balance)
   //
   const [formData, setFormData] = useState({
     title: "",

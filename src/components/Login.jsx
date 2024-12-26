@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(`Field: ${name}, Value: ${value}`);
+    // //(`Field: ${name}, Value: ${value}`);
     setFormData({
       ...formData,
       [name]: value,
@@ -29,11 +29,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData)
+    //(formData)
 
     dispatch(loginUser(formData))
       .then((data) => {
-        console.log(data)
+        //(data)
         if(data?.payload?.success){
           toast({
             title: data?.payload?.message || "server not responding",

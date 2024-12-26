@@ -6,7 +6,7 @@ import Expenes from './Expenes';
 
 export default function SideHome({active, setActive}) {
 
-        // console.log("active",active)
+        // //("active",active)
     const displayData = ( ) => {
         switch(active){
             case 1 : return <Dashboard/>;
