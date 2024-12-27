@@ -16,6 +16,7 @@ const Login = () => {
   }
 
   const [formData , setFormData] = useState(initialState)
+  const [help,setHelp] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,6 +44,9 @@ const Login = () => {
             title: data?.payload?.message || "server not responding",
             variant: "destructive",
           });
+          if(data?.payload?.help || false){
+            setHelp(true)
+          }
         }
       })
 
@@ -109,6 +113,10 @@ const Login = () => {
             )}
           </button>
         </form>
+        { help && <p className="mt-4 text-sm" >
+          Forget ?{' '}
+          <Link to="/recovry" className="text-indigo-500 hover:underline"> password</Link>
+        </p>}
         <p className="mt-4 text-sm">
           Don't have an account?{' '}
           <Link to="/logup" className="text-indigo-500 hover:underline">

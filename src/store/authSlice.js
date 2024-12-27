@@ -5,7 +5,12 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   user: null,
+  otpLoading : false,
+  otpMessage : null
 };
+
+
+
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
@@ -68,6 +73,15 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
   return response.data;
 });
 
+export const getOtp = createAsyncThunk("/auth/getOtp" , async(email) => {
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_URL_SERVER}auth/logup/getOtp/${email}`,
+  )
+  // console.log(response.data)
+  return response.data
+})
+
+
 
 
 const authSlice = createSlice({
@@ -76,6 +90,19 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+    .addCase(getOtp.pending, (state) => {
+      state.otpLoading = true;
+    })
+    .addCase(getOtp.fulfilled, (state, action) => {
+      state.otpLoading = false;
+        state.otpMessage = action.payload.success ? action.payload.message : null;
+    })
+    .addCase(getOtp.rejected, (state) => {
+      state.otpLoading = false;
+    })
+
+
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })

@@ -6,6 +6,7 @@ import Home from './components/Home'
 import NoPage from './components/NoPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkAuth } from './store/authSlice'
+import Recovery from './components/Recovery'
 
 export default function App() {
   // const user = null  // Change this to check if the user is logged in
@@ -28,19 +29,11 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-
         <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
         <Route path="/logup" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
-
         <Route path='/home' element={isAuthenticated ? <Home/> :<Navigate to="/login" /> } />
-
-
-
-
-
+        <Route path="/recovry" element={isAuthenticated ? <Home/> :<Recovery/> }/>
         <Route path='*' element={<NoPage/>} />
-
-
       </Routes>
     </>
   )
