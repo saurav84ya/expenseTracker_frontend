@@ -11,6 +11,8 @@ export default function Dashboard() {
     (state) => state.incomeSlice
   );
 
+  // const { } = useContext(MyContext)
+
   const { user } = useSelector((state) => state.authSlice);
   const { setTotalB } = useContext(MyContext);
 
@@ -36,10 +38,14 @@ export default function Dashboard() {
   // dashBoardIncome, dashBoardExpnses are arrays of objects with amount and updatedAt properties 
   // [{...},{...},{...},{...},{...}] // [{...},{...},{...},{...},{...}]
   const mix =  [ ...(dashBoardIncome || []) , ...(dashBoardExpnses || []) ,]
+  // setAll(mix || [])
+  
 
   const recentTransactions = mix
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(0, 3);
+
+
 
 
 

@@ -11,6 +11,10 @@ export const MyContextProvider = ({ children }) => {
   const [totalE, setTotalE] = useState(null);
   const [totalB, setTotalB] = useState(null);
 
+
+  const [all , setAll] = useState()
+
+
   const updateState = (newValue) => {
     setState(newValue);
   };
@@ -25,7 +29,7 @@ export const MyContextProvider = ({ children }) => {
         totalE,
         setTotalE,
         totalB,
-        setTotalB,
+        setTotalB,all , setAll
       }}
     >
       {children}

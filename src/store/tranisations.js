@@ -12,7 +12,7 @@ const initialState = {
     balance : null ,
     dashBoardIncome : null,
     dashBoardExpnses : null,
-    dashBoardLoading : false
+    dashBoardLoading : false,
 }
 
 export const addIncome = createAsyncThunk(
@@ -203,6 +203,9 @@ const incomeSlice = createSlice({
             state.message =  action.payload.message
             state.dashBoardIncome = action.payload.success ? action.payload.incomes : null
             state.dashBoardExpnses = action.payload.success ? action.payload.expnses : null
+                
+            
+
         })
         .addCase(getDashBoard.rejected , (state) => {
             state.dashBoardLoading = false;
