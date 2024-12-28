@@ -12,7 +12,7 @@ export default function App() {
   // const user = null  // Change this to check if the user is logged in
   // const isAuthenticated = false  // Checks if the user exists (authenticated)
 
-  const {user , isAuthenticated , isLoading} = useSelector((state) => state.authSlice)
+  const {user , isAuthenticated ,isServerLoading, isLoading} = useSelector((state) => state.authSlice)
 
   // //(user)
 
@@ -25,7 +25,7 @@ export default function App() {
   },[dispatch])
 
 
-  if (isLoading) {
+  if (isServerLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-screen text-center bg-[#FAC67A] px-4">
         <div className="text-lg font-semibold text-gray-800 mb-2">
