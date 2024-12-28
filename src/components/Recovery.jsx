@@ -13,11 +13,14 @@ export default function Recovery() {
   const [get, setGet] = useState(false);
   const [newPass, setNewPass] = useState(false);
 
+  const [emailR,setEmailR] = useState("")
+
   const [newPassword, setNewPassword] = useState({
     password: "",
     confirmPassword: "",
   });
 
+  console.log(emailR)
   const { toast } = useToast();
 
   const requestOtp = async () => {
@@ -68,6 +71,8 @@ export default function Recovery() {
       });
       return;
     }
+
+    setEmailR(formData.email)
 
     setLoading(true);
 
@@ -121,12 +126,14 @@ export default function Recovery() {
       return;
     }
 
+    console.log( password , emailR)
+
     setLoading(true);
 
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL_SERVER}auth/recover/changePass`,
-        { password },
+        { password , email : emailR},
         { withCredentials: true }
       );
 
